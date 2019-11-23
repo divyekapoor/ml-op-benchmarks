@@ -11,7 +11,7 @@ torch_native:
 	./make_torch_native.sh
 
 cc_native:
-	./make_raw_cc.sh
+	./make_cc_native.sh
 
 test: tfbench torchbench torch_native cc_native
 
