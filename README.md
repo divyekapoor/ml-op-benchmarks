@@ -110,7 +110,7 @@ Performance Tables
 
 | FizzBuzz Iteration Counts                            | 100000            |                         |                    |                |
 | -------------------------                            | ----------------- | ----------------------- | ------------------ | -------------  |
-|                                                      | Raw Latency (ms)  | Per Run Latency (usec)  | Python Multiplier  | C++ Multiplier |
+|                                                      | Method Latency (ms) | Iteration Latency (usec)  | Python Multiplier  | C++ Multiplier |
 | PyTorch Python                                       | 4007              | 40.07                   | 222.61             | 23851          |
 | PyTorch TorchScript Python (from Loaded TorchScript) | 2830              | 28.3                    | **157.22**         | 16845          |
 | PyTorch TorchScript C++ (Native)                     | 255               | 2.55                    | **14.17**          | 1518           |
