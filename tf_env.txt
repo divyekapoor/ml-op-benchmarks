@@ -1,0 +1,125 @@
+
+== check python ===================================================
+python version: 2.7.16
+python branch: 
+python build version: ('default', 'Apr 12 2019 15:32:40')
+python compiler version: GCC 4.2.1 Compatible Apple LLVM 10.0.1 (clang-1001.0.46.3)
+python implementation: CPython
+
+
+== check os platform ===============================================
+os: Darwin
+os kernel version: Darwin Kernel Version 18.7.0: Sat Oct 12 00:02:19 PDT 2019; root:xnu-4903.278.12~1/RELEASE_X86_64
+os release version: 18.7.0
+os platform: Darwin-18.7.0-x86_64-i386-64bit
+linux distribution: ('', '', '')
+linux os distribution: ('', '', '')
+mac version: ('10.14.6', ('', '', ''), 'x86_64')
+uname: ('Darwin', 'dkapoor-26JJHD2.dyn.pinadmin.com', '18.7.0', 'Darwin Kernel Version 18.7.0: Sat Oct 12 00:02:19 PDT 2019; root:xnu-4903.278.12~1/RELEASE_X86_64', 'x86_64', 'i386')
+architecture: ('64bit', '')
+machine: x86_64
+
+
+== are we in docker =============================================
+No
+
+== compiler =====================================================
+Apple clang version 11.0.0 (clang-1100.0.33.8)
+Target: x86_64-apple-darwin18.7.0
+Thread model: posix
+InstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin
+
+== check pips ===================================================
+numpy               1.15.4    
+protobuf            3.7.1     
+tensorflow          1.12.0    
+
+== check for virtualenv =========================================
+False
+
+== tensorflow import ============================================
+
+== env ==========================================================
+LD_LIBRARY_PATH is unset
+DYLD_LIBRARY_PATH is unset
+
+== nvidia-smi ===================================================
+./tensorflow/tools/tf_env_collect.sh: line 147: nvidia-smi: command not found
+
+== cuda libs  ===================================================
+
+== check python ===================================================
+python version: 3.7.4
+python branch: 
+python build version: ('default', 'Jul  9 2019 18:13:23')
+python compiler version: Clang 10.0.1 (clang-1001.0.46.4)
+python implementation: CPython
+
+
+== check os platform ===============================================
+os: Darwin
+os kernel version: Darwin Kernel Version 18.7.0: Sat Oct 12 00:02:19 PDT 2019; root:xnu-4903.278.12~1/RELEASE_X86_64
+os release version: 18.7.0
+os platform: Darwin-18.7.0-x86_64-i386-64bit
+linux distribution: ('', '', '')
+linux os distribution: ('', '', '')
+mac version: ('10.14.6', ('', '', ''), 'x86_64')
+uname: uname_result(system='Darwin', node='dkapoor-26JJHD2.dyn.pinadmin.com', release='18.7.0', version='Darwin Kernel Version 18.7.0: Sat Oct 12 00:02:19 PDT 2019; root:xnu-4903.278.12~1/RELEASE_X86_64', machine='x86_64', processor='i386')
+architecture: ('64bit', '')
+machine: x86_64
+
+
+== are we in docker =============================================
+No
+
+== compiler =====================================================
+Apple clang version 11.0.0 (clang-1100.0.33.8)
+Target: x86_64-apple-darwin18.7.0
+Thread model: posix
+InstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin
+
+== check pips ===================================================
+numpy                         1.17.3             
+protobuf                      3.10.0             
+tensorflow                    2.0.0              
+tensorflow-addons             0.6.0              
+tensorflow-estimator          2.0.1              
+tensorflow-model-optimization 0.1.3              
+tensorflow-privacy            0.2.2              
+
+== check for virtualenv =========================================
+False
+
+== tensorflow import ============================================
+tf.version.VERSION = 2.1.0-dev20191107
+tf.version.GIT_VERSION = v1.12.1-17543-gb4b5ce680c
+tf.version.COMPILER_VERSION = 4.2.1 Compatible Apple LLVM 10.0.0 (clang-1000.11.45.5)
+
+== env ==========================================================
+LD_LIBRARY_PATH is unset
+DYLD_LIBRARY_PATH is unset
+
+== nvidia-smi ===================================================
+./tensorflow/tools/tf_env_collect.sh: line 147: nvidia-smi: command not found
+
+== cuda libs  ===================================================
+
+== tensorflow installed from info ==================
+Name: tensorflow
+Version: 2.0.0
+Summary: TensorFlow is an open source machine learning framework for everyone.
+Home-page: https://www.tensorflow.org/
+Author-email: packages@tensorflow.org
+License: Apache 2.0
+Location: /Users/dkapoor/src/scratch/venv3/lib/python3.7/site-packages
+Required-by: tensorflow-addons
+
+== python version  ==============================================
+(major, minor, micro, releaselevel, serial)
+(3, 7, 4, 'final', 0)
+
+== bazel version  ===============================================
+Build label: 0.23.1-homebrew
+Build time: Mon Mar 4 22:27:05 2019 (1551738425)
+Build timestamp: 1551738425
+Build timestamp as int: 1551738425

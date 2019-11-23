@@ -1,0 +1,49 @@
+Metadata-Version: 2.1
+Name: onnxruntime
+Version: 1.0.0
+Summary: ONNX Runtime Python bindings
+Home-page: UNKNOWN
+Author: Microsoft Corporation
+Author-email: onnx@microsoft.com
+License: MIT License
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Developers
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Provides-Extra: backend
+Requires-Dist: onnx (>=1.2.3) ; extra == 'backend'
+Provides-Extra: numpy
+Requires-Dist: numpy (>=1.15.0) ; extra == 'numpy'
+
+ONNX Runtime
+============
+
+ONNX Runtime is a performance-focused scoring engine for Open Neural Network Exchange (ONNX) models.
+For more information on ONNX Runtime, please see `aka.ms/onnxruntime <https://aka.ms/onnxruntime/>`_ or the `Github project <https://github.com/microsoft/onnxruntime/>`_.
+
+
+Changes
+-------
+
+1.0.0
+^^^^^
+
+Release Notes : https://github.com/Microsoft/onnxruntime/releases/tag/v1.0.0
+
+0.5.0
+^^^^^
+
+Release Notes : https://github.com/Microsoft/onnxruntime/releases/tag/v0.5.0
+
+0.4.0
+^^^^^
+
+Release Notes : https://github.com/Microsoft/onnxruntime/releases/tag/v0.4.0
+
+

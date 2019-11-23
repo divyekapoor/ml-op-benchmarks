@@ -1,0 +1,23 @@
+Metadata-Version: 2.1
+Name: tensorflow-model-optimization
+Version: 0.1.3
+Summary: A suite of tools that users, both novice and advanced can use to optimize machine learning models for deployment and execution.
+Home-page: https://github.com/tensorflow/model-optimization
+Author: Google LLC
+Author-email: no-reply@google.com
+License: Apache 2.0
+Keywords: tensorflow model optimization machine learning
+Platform: UNKNOWN
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Education
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Topic :: Scientific/Engineering
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Requires-Dist: numpy (~=1.14)
+Requires-Dist: six (~=1.10)
+Requires-Dist: enum34 (~=1.1)
+
+UNKNOWN
+
+

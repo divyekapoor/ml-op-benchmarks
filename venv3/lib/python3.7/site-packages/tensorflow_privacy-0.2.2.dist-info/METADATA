@@ -1,0 +1,17 @@
+Metadata-Version: 2.1
+Name: tensorflow-privacy
+Version: 0.2.2
+Summary: UNKNOWN
+Home-page: https://github.com/tensorflow/privacy
+License: Apache-2.0
+Platform: UNKNOWN
+Requires-Dist: scipy (>=0.17)
+Requires-Dist: mpmath
+Provides-Extra: tf
+Requires-Dist: tensorflow (>=1.0.0) ; extra == 'tf'
+Provides-Extra: tf_gpu
+Requires-Dist: tensorflow-gpu (>=1.0.0) ; extra == 'tf_gpu'
+
+UNKNOWN
+
+
