@@ -122,6 +122,8 @@ Expected Performance
 --------------------
 
 Both systems should be performing close to the speed of Raw Python (if not faster).
+Even allowing for significant overhead, they should be within 10x of Raw Python.
+Looping over 100K values should not take 4 seconds.
 In practice, the systems are performing much slower than expected.
 
 
@@ -130,7 +132,7 @@ Issues Filed
 
 Tensorflow: https://github.com/tensorflow/tensorflow/issues/34500
 
-PyTorch: TBD
+PyTorch: https://github.com/pytorch/pytorch/issues/30365
 
 How To Reproduce
 ----------------
