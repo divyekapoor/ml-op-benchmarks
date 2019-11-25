@@ -7,13 +7,16 @@ tfbench:
 torchbench:
 	./make_torchbench.sh
 
+npbench:
+	./make_npbench.sh
+
 torch_native:
 	./make_torch_native.sh
 
 cc_native:
 	./make_cc_native.sh
 
-test: tfbench torchbench torch_native cc_native
+test: tfbench torchbench npbench torch_native cc_native
 
 clean:
 	git clean -fxd

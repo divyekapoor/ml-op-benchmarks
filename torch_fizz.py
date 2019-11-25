@@ -5,24 +5,21 @@ import torch
 class TorchFizzBuzz(torch.nn.Module):
     def __init__(self):
         super(TorchFizzBuzz, self).__init__()
-        self.fizz = torch.tensor(0, requires_grad=False)
-        self.buzz = torch.tensor(0, requires_grad=False)
-        self.fizzbuzz = torch.tensor(0, requires_grad=False)
 
     def forward(self, n: torch.Tensor):
         i = torch.tensor(0, dtype=torch.int32, requires_grad=False)
-        self.fizz = torch.zeros(1)
-        self.buzz = torch.zeros(1)
-        self.fizzbuzz = torch.zeros(1)
+        fizz = torch.zeros(1)
+        buzz = torch.zeros(1)
+        fizzbuzz = torch.zeros(1)
         while i < n:
             if i % 6 == 0:
-                self.fizzbuzz += 1
+                fizzbuzz += 1
             elif i % 3 == 0:
-                self.buzz += 1
+                buzz += 1
             elif i % 2 == 0:
-                self.fizz += 1
+                fizz += 1
             i += 1
-        return torch.stack([self.fizz, self.buzz, self.fizzbuzz])
+        return torch.stack([fizz, buzz, fizzbuzz])
 
 
 class PyFizzBuzz:
