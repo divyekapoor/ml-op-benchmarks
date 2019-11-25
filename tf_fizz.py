@@ -22,6 +22,38 @@ class FizzBuzz(tf.Module):
         return [fizz, buzz, fizzbuzz]
 
 
+class FizzBuzzRawOps(tf.Module):
+    @tf.function(input_signature=[tf.TensorSpec([], tf.int32)], autograph=False)
+    def model(self,
+              n  # Shape [] -- int32 the max number to loop FizzBuzz to
+              ):  # Returns counts for fizz, buzz and fizzbuzz. Shape: [1] with length 3
+        fizz = 0
+        buzz = 0
+        fizzbuzz = 0
+
+        def cond(i, fizz, buzz, fizzbuzz):
+          return i < n
+
+        def body(i, fizz, buzz, fizzbuzz):
+          return (i + 1,) + tf.cond(
+              i % 6 == 0,
+              lambda: (fizz, buzz, fizzbuzz + 1),
+              lambda: tf.cond(
+                  i % 3 == 0,
+                  lambda: (fizz, buzz + 1, fizzbuzz),
+                  lambda: tf.cond(
+                      i % 2 == 0,
+                      lambda: (fizz + 1, buzz, fizzbuzz),
+                      lambda: (fizz, buzz, fizzbuzz)
+                  )
+              )
+          )
+
+        _, fizz, buzz, fizzbuzz = tf.while_loop(
+            cond, body, (0, fizz, buzz, fizzbuzz))
+        return [fizz, buzz, fizzbuzz]
+
+
 class PyFizzBuzz:
     def model(self, n):
         fizz = 0
@@ -38,6 +70,7 @@ class PyFizzBuzz:
 
 
 tfmod = FizzBuzz()
+tfmod_raw = FizzBuzzRawOps()
 pymod = PyFizzBuzz()
 COUNT = 100_000
 
@@ -54,6 +87,13 @@ perf_counter_ns_end = time.perf_counter_ns()
 time_taken_ns = perf_counter_ns_end - perf_counter_ns_start
 print('Result: ', result)
 print('Time taken (TF Python) (ms): ', time_taken_ns / 1e6)
+
+perf_counter_ns_start = time.perf_counter_ns()
+result = tfmod_raw.model(COUNT)
+perf_counter_ns_end = time.perf_counter_ns()
+time_taken_ns = perf_counter_ns_end - perf_counter_ns_start
+print('Result: ', result)
+print('Time taken (TF Python no AutoGraph) (ms): ', time_taken_ns / 1e6)
 
 perf_counter_ns_start = time.perf_counter_ns()
 result = tf_loaded_model.model(COUNT)
