@@ -9,8 +9,9 @@ class NumPyFizzBuzz:
         fizz = np.array(0)
         buzz = np.array(0)
         fizzbuzz = np.array(0)
-        # Force everything to be a numpy single element array, for an even comparison
-        for i in np.arange(n)[:, np.newaxis]:
+        for i1 in range(n):
+            # Force everything to be a single element array, for an even comparison w/ ops
+            i = np.array(i1)
             if i % 6 == 0:
                 fizzbuzz += 1
             elif i % 3 == 0:
