@@ -69,6 +69,24 @@ class TorchFizzBuzz(torch.nn.Module):
         return torch.stack([self.fizz, self.buzz, self.fizzbuzz])
 ```
 
+For NumPy:
+```python
+class NumPyFizzBuzz:
+    def model(self, n):
+        fizz = np.array(0)
+        buzz = np.array(0)
+        fizzbuzz = np.array(0)
+        # Force everything to be a numpy single element array, for an even comparison
+        for i in np.arange(n)[:, np.newaxis]:
+            if i % 6 == 0:
+                fizzbuzz += 1
+            elif i % 3 == 0:
+                buzz += 1
+            elif i % 2 == 0:
+                fizz += 1
+        return [fizz, buzz, fizzbuzz]
+```
+
 Benchmark System
 ----------------
 
@@ -95,25 +113,29 @@ Hardware Overview:
 Performance Tables
 ------------------
 
+Tensorflow:
 
 | FizzBuzz Iteration Counts     | 100000              |                          |                    |                |
 | -------------------------     | -----------------   | -----------------------  | ------------------ | -------------  |
 |                               | Method Latency (ms) | Iteration Latency (usec) | Python Multiplier  | C++ Multiplier |
 | Tensorflow Python             | 4087                | 40.87                    | **227.06**         | 24327          |
 | Tensorflow Saved Model Python | 4046                | 40.46                    | **224.78**         | 24083          |
+| NumPy Python                  | 536                 | 0.536                    | 2.97               | 3190           |
 | Raw Python                    | 18                  | 0.18                     | 1.00               | 107            |
 | Raw C++                       | 0.168               | 0.00168                  | 0.01               | 1              |
 
+PyTorch:
 
-| FizzBuzz Iteration Counts                            | 100000            |                         |                    |                |
-| -------------------------                            | ----------------- | ----------------------- | ------------------ | -------------  |
-|                                                      | Method Latency (ms) | Iteration Latency (usec)  | Python Multiplier  | C++ Multiplier |
-| PyTorch Python                                       | 4007              | 40.07                   | 222.61             | 23851          |
-| PyTorch TorchScript Python (from Loaded TorchScript) | 2830              | 28.3                    | **157.22**         | 16845          |
-| PyTorch TorchScript C++ (Native)                     | 255               | 2.55                    | **14.17**          | 1518           |
-| PyTorch TorchScript C++ (Native + ATen Tensors)      | 252               | 2.52                    | **14.00**          | 1500           |
-| Raw Python                                           | 18                | 0.18                    | 1.00               | 107            |
-| Raw C++                                              | 0.168             | 0.00168                 | 0.01               | 1              |
+| FizzBuzz Iteration Counts                            | 100000              |                          |                    |                |
+| -------------------------                            | -----------------   | -----------------------  | ------------------ | -------------  |
+|                                                      | Method Latency (ms) | Iteration Latency (usec) | Python Multiplier  | C++ Multiplier |
+| PyTorch Python                                       | 4007                | 40.07                    | 222.61             | 23851          |
+| PyTorch TorchScript Python (from Loaded TorchScript) | 2830                | 28.3                     | **157.22**         | 16845          |
+| PyTorch TorchScript C++ (Native)                     | 255                 | 2.55                     | **14.17**          | 1518           |
+| PyTorch TorchScript C++ (Native + ATen Tensors)      | 252                 | 2.52                     | **14.00**          | 1500           |
+| NumPy Python                                         | 536                 | 0.536                    | 2.97               | 3190           |
+| Raw Python                                           | 18                  | 0.18                     | 1.00               | 107            |
+| Raw C++                                              | 0.168               | 0.00168                  | 0.01               | 1              |
 
 Expected Performance
 --------------------
@@ -140,6 +162,10 @@ $ make tfbench
 
 ```bash
 $ make torchbench
+```
+
+```bash
+$ make npbench
 ```
 
 ```bash
