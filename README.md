@@ -24,6 +24,51 @@ Tensorflow Ops and PyTorch TorchScript are 2 orders of magnitude slower
 than similarly written native or Python code, making them useful in only 
 very limited contexts. 
 
+Performance Tables
+------------------
+
+Tensorflow:
+
+| FizzBuzz Iteration Counts      | 100000              |                          |                    |                |
+| -------------------------      | -----------------   | -----------------------  | ------------------ | -------------  |
+|                                | Method Latency (ms) | Iteration Latency (usec) | Python Multiplier  | C++ Multiplier |
+| Tensorflow Python              | 4087                | 40.87                    | **227.06**         | 24327          |
+| Tensorflow Saved Model Python  | 4046                | 40.46                    | **224.78**         | 24083          |
+| Tensorflow Python no Autograph | 3981                | 39.81                    | **221.16**         | 23696          |
+| NumPy Python                   | 420                 | 0.42                     | **23.3**           | 2500           |
+| Raw Python                     | 18                  | 0.18                     | 1.00               | 107            |
+| Raw C++                        | 0.168               | 0.00168                  | 0.01               | 1              |
+
+PyTorch:
+
+| FizzBuzz Iteration Counts                            | 100000              |                          |                    |                |
+| -------------------------                            | -----------------   | -----------------------  | ------------------ | -------------  |
+|                                                      | Method Latency (ms) | Iteration Latency (usec) | Python Multiplier  | C++ Multiplier |
+| PyTorch Python                                       | 4007                | 40.07                    | 222.61             | 23851          |
+| PyTorch TorchScript Python (from Loaded TorchScript) | 2830                | 28.3                     | **157.22**         | 16845          |
+| PyTorch TorchScript C++ (Native)                     | 255                 | 2.55                     | **14.17**          | 1518           |
+| PyTorch TorchScript C++ (Native + ATen Tensors)      | 252                 | 2.52                     | **14.00**          | 1500           |
+| NumPy Python                                         | 420                 | 0.42                     | **23.3**           | 2500           |
+| Raw Python                                           | 18                  | 0.18                     | 1.00               | 107            |
+| Raw C++                                              | 0.168               | 0.00168                  | 0.01               | 1              |
+
+Expected Performance
+--------------------
+
+Both systems should be performing close to the speed of Raw Python (if not faster).
+Even allowing for significant overhead, they should be within 10x of Raw Python.
+Looping over 100K values should not take 4 seconds.
+In practice, the systems are performing much slower than expected.
+
+
+Issues Filed
+------------
+
+Tensorflow: https://github.com/tensorflow/tensorflow/issues/34500
+
+PyTorch: https://github.com/pytorch/pytorch/issues/30365
+
+
 Benchmark code
 --------------
 ```python
@@ -109,50 +154,6 @@ Hardware Overview:
   Memory:	16 GB
   Boot ROM Version:	1037.40.124.0.0 (iBridge: 17.16.11081.0.0,0)
 ```
-
-Performance Tables
-------------------
-
-Tensorflow:
-
-| FizzBuzz Iteration Counts      | 100000              |                          |                    |                |
-| -------------------------      | -----------------   | -----------------------  | ------------------ | -------------  |
-|                                | Method Latency (ms) | Iteration Latency (usec) | Python Multiplier  | C++ Multiplier |
-| Tensorflow Python              | 4087                | 40.87                    | **227.06**         | 24327          |
-| Tensorflow Saved Model Python  | 4046                | 40.46                    | **224.78**         | 24083          |
-| Tensorflow Python no Autograph | 3981                | 39.81                    | **221.16**         | 23696          |
-| NumPy Python                   | 420                 | 0.42                     | **23.3**           | 2500           |
-| Raw Python                     | 18                  | 0.18                     | 1.00               | 107            |
-| Raw C++                        | 0.168               | 0.00168                  | 0.01               | 1              |
-
-PyTorch:
-
-| FizzBuzz Iteration Counts                            | 100000              |                          |                    |                |
-| -------------------------                            | -----------------   | -----------------------  | ------------------ | -------------  |
-|                                                      | Method Latency (ms) | Iteration Latency (usec) | Python Multiplier  | C++ Multiplier |
-| PyTorch Python                                       | 4007                | 40.07                    | 222.61             | 23851          |
-| PyTorch TorchScript Python (from Loaded TorchScript) | 2830                | 28.3                     | **157.22**         | 16845          |
-| PyTorch TorchScript C++ (Native)                     | 255                 | 2.55                     | **14.17**          | 1518           |
-| PyTorch TorchScript C++ (Native + ATen Tensors)      | 252                 | 2.52                     | **14.00**          | 1500           |
-| NumPy Python                                         | 420                 | 0.42                     | **23.3**           | 2500           |
-| Raw Python                                           | 18                  | 0.18                     | 1.00               | 107            |
-| Raw C++                                              | 0.168               | 0.00168                  | 0.01               | 1              |
-
-Expected Performance
---------------------
-
-Both systems should be performing close to the speed of Raw Python (if not faster).
-Even allowing for significant overhead, they should be within 10x of Raw Python.
-Looping over 100K values should not take 4 seconds.
-In practice, the systems are performing much slower than expected.
-
-
-Issues Filed
-------------
-
-Tensorflow: https://github.com/tensorflow/tensorflow/issues/34500
-
-PyTorch: https://github.com/pytorch/pytorch/issues/30365
 
 How To Reproduce
 ----------------
