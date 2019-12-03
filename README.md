@@ -3,13 +3,13 @@ Tensorflow / PyTorch Op Benchmark
 
 Goal
 ----
-To test and benchmark Tensorflow and PyTorch op based computation 
+To test and benchmark Tensorflow and PyTorch op based computation
 against JIT'd (Python) and compiled (C++, PyTorch native) implementations.
 
 Motivation
 ----------
-We currently implement cross features using native C++ code outside of 
-the Tensorflow Saved Model. The goal of this effort is to judge 
+We currently implement cross features using native C++ code outside of
+the Tensorflow Saved Model. The goal of this effort is to judge
 feasibility and performance impact of implementing these cross
 features within the model file using op-based computation.
 
@@ -20,9 +20,9 @@ serving loop, this effort is blocked.
 
 Outcomes
 --------
-Tensorflow Ops and PyTorch TorchScript are 2 orders of magnitude slower 
-than similarly written native or Python code, making them useful in only 
-very limited contexts. 
+Tensorflow Ops and PyTorch TorchScript are 2 orders of magnitude slower
+than similarly written native or Python code, making them useful in only
+very limited contexts.
 
 Performance Tables
 ------------------
@@ -50,7 +50,18 @@ PyTorch:
 | PyTorch TorchScript C++ (Native + ATen Tensors)      | 252                 | 2.52                     | **14.00**          | 1500           |
 | NumPy Python                                         | 420                 | 0.42                     | **23.3**           | 2500           |
 | Raw Python                                           | 18                  | 0.18                     | 1.00               | 107            |
+| **PyTorch Vectorized**                               | **7.8**             | **0.078**                | **0.43**           | 46             |
+| **PyTorch Vectorized (optimized=True)**              | **5.03**            | **0.050**                | **0.28**           | 29             |
+| **PyTorch Vectorized (optimized=False)**             | **4.74**            | **0.047**                | **0.26**           | 28             |
 | Raw C++                                              | 0.168               | 0.00168                  | 0.01               | 1              |
+
+
+**Note**: These numbers are meant to be indicative. We're not looking at small
+micro-differences of O(10%), the differences are in orders of magnitude. The
+benchmarked numbers are stable to within 10% on repeated runs, so feel free to
+assume equivalency for similarly placed values. However, note that the
+error bars are not large enough to explain the typical 10000% differences seen above.
+These differences are indicative of inefficiencies in software.
 
 Expected Performance
 --------------------
