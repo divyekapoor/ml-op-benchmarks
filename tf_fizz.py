@@ -72,7 +72,7 @@ class PyFizzBuzz:
 tfmod = FizzBuzz()
 tfmod_raw = FizzBuzzRawOps()
 pymod = PyFizzBuzz()
-COUNT = 100_000
+COUNT = 100000
 
 # What's the code
 print(tf.autograph.to_code(tfmod.model.python_function))
@@ -101,6 +101,27 @@ perf_counter_ns_end = time.perf_counter_ns()
 time_taken_ns = perf_counter_ns_end - perf_counter_ns_start
 print('Result: ', result)
 print('Time taken (SavedModel) (ms): ', time_taken_ns / 1e6)
+
+perf_counter_ns_start = time.perf_counter_ns()
+result = tf.xla.experimental.compile(tf_loaded_model.model, [tf.constant(COUNT)])
+perf_counter_ns_end = time.perf_counter_ns()
+time_taken_ns = perf_counter_ns_end - perf_counter_ns_start
+print('Result: ', result)
+print('Time taken (XLA SavedModel 1st run) (ms): ', time_taken_ns / 1e6)
+
+perf_counter_ns_start = time.perf_counter_ns()
+result = tf.xla.experimental.compile(tf_loaded_model.model, [tf.constant(COUNT)])
+perf_counter_ns_end = time.perf_counter_ns()
+time_taken_ns = perf_counter_ns_end - perf_counter_ns_start
+print('Result: ', result)
+print('Time taken (XLA SavedModel 2nd run) (ms): ', time_taken_ns / 1e6)
+
+perf_counter_ns_start = time.perf_counter_ns()
+result = tf.xla.experimental.compile(tf_loaded_model.model, [tf.constant(COUNT)])
+perf_counter_ns_end = time.perf_counter_ns()
+time_taken_ns = perf_counter_ns_end - perf_counter_ns_start
+print('Result: ', result)
+print('Time taken (XLA SavedModel 3rd run) (ms): ', time_taken_ns / 1e6)
 
 perf_counter_ns_start = time.perf_counter_ns()
 result = pymod.model(COUNT)

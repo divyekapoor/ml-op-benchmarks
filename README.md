@@ -35,7 +35,8 @@ Tensorflow:
 | Tensorflow Python              | 4087                | 40.87                    | **227.06**         | 24327          |
 | Tensorflow Saved Model Python  | 4046                | 40.46                    | **224.78**         | 24083          |
 | Tensorflow Python no Autograph | 3981                | 39.81                    | **221.16**         | 23696          |
-| NumPy Python                   | 420                 | 0.42                     | **23.3**           | 2500           |
+| NumPy Python                   | 420                 | 4.2                      | **23.3**           | 2500           |
+| **Tensorflow Python with XLA** | **81**              | **0.81**                 | **4.5**            | 482            |
 | Raw Python                     | 18                  | 0.18                     | 1.00               | 107            |
 | Raw C++                        | 0.168               | 0.00168                  | 0.01               | 1              |
 
@@ -48,7 +49,7 @@ PyTorch:
 | PyTorch TorchScript Python (from Loaded TorchScript) | 2830                | 28.3                     | **157.22**         | 16845          |
 | PyTorch TorchScript C++ (Native)                     | 255                 | 2.55                     | **14.17**          | 1518           |
 | PyTorch TorchScript C++ (Native + ATen Tensors)      | 252                 | 2.52                     | **14.00**          | 1500           |
-| NumPy Python                                         | 420                 | 0.42                     | **23.3**           | 2500           |
+| NumPy Python                                         | 420                 | 4.2                     | **23.3**           | 2500           |
 | Raw Python                                           | 18                  | 0.18                     | 1.00               | 107            |
 | **PyTorch Vectorized**                               | **7.8**             | **0.078**                | **0.43**           | 46             |
 | **PyTorch Vectorized (optimized=True)**              | **5.03**            | **0.050**                | **0.28**           | 29             |
