@@ -167,6 +167,13 @@ Hardware Overview:
   Boot ROM Version:	1037.40.124.0.0 (iBridge: 17.16.11081.0.0,0)
 ```
 
+```
+Tensorflow: 2.1.0-dev20200102 (tf-nightly, similar results with tf-2-stable)
+PyTorch: 1.3.0-mac
+```
+
+All runs on CPU.
+
 How To Reproduce
 ----------------
 
