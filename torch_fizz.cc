@@ -14,16 +14,31 @@
 
 using namespace std;
 
-struct FizzBuzz : public torch::nn::Module {
-    FizzBuzz() {
+struct FizzBuzzTensorLoop : public torch::nn::Module {
+    torch::Tensor forward(torch::Tensor n) {
+        torch::Tensor fizz = torch::zeros(1);
+        torch::Tensor buzz = torch::zeros(1);
+        torch::Tensor fizzbuzz = torch::zeros(1);
+        for (torch::Tensor i = torch::zeros(1); (i < n).item().toBool(); i += 1) {
+            if ((i % 6 == 0).item().toBool()) {
+                fizzbuzz += 1;
+            } else if ((i % 3 == 0).item().toBool()) {
+                buzz += 1;
+            } else if ((i % 2 == 0).item().toBool()) {
+                fizz += 1;
+            }
+        }
+        return torch::stack({fizz, buzz, fizzbuzz});
     }
+};
 
+struct FizzBuzzNativeLoop : public torch::nn::Module {
     torch::Tensor forward(torch::Tensor n) {
         int nmax = n.item().toInt();
         torch::Tensor fizz = torch::zeros(1);
         torch::Tensor buzz = torch::zeros(1);
         torch::Tensor fizzbuzz = torch::zeros(1);
-        for (int i = 0; i < nmax; ++i) {
+        for (int i = 0; i < nmax; i += 1) {
             if (i % 6 == 0) {
                 fizzbuzz += 1;
             } else if (i % 3 == 0) {
@@ -36,27 +51,6 @@ struct FizzBuzz : public torch::nn::Module {
     }
 };
 
-struct FizzBuzzAT : public torch::nn::Module {
-    FizzBuzzAT() {
-    }
-
-    torch::Tensor forward(at::Tensor n) {
-        int nmax = n.item().toInt();
-        at::Tensor fizz = at::zeros(1);
-        at::Tensor buzz = at::zeros(1);
-        at::Tensor fizzbuzz = at::zeros(1);
-        for (int i = 0; i < nmax; ++i) {
-            if (i % 6 == 0) {
-                fizzbuzz += 1;
-            } else if (i % 3 == 0) {
-                buzz += 1;
-            } else if (i % 2 == 0) {
-                fizz += 1;
-            }
-        }
-        return torch::stack({fizz, buzz, fizzbuzz});
-    }
-};
 
 // C++ template to print vector container elements
 template <typename T>
@@ -99,23 +93,22 @@ int main(int argc, char* argv[]) {
     torch::jit::script::Module model = torch::jit::load("/tmp/fizzbuzz.pyt");
     model.eval();
     auto end = chrono::high_resolution_clock::now();
-    cout << "Time taken (PyTorch Load) (ms): "
+    cout << "Time taken (PyTorch TorchScript Load) (ms): "
         << chrono::duration_cast<std::chrono::milliseconds>(end - start).count() << '\n';
 
     start = chrono::high_resolution_clock::now();
-    FizzBuzz cpp_model;
-    cpp_model.eval();
+    FizzBuzzNativeLoop cpp_model_native_loop;
+    cpp_model_native_loop.eval();
     end = chrono::high_resolution_clock::now();
-    cout << "Time taken (PyTorch Native Model Build) (ms): "
+    cout << "Time taken (PyTorch C++ Native Loop Model Build) (ms): "
         << chrono::duration_cast<std::chrono::milliseconds>(end - start).count() << '\n';
 
     start = chrono::high_resolution_clock::now();
-    FizzBuzzAT at_cpp_model;
-    at_cpp_model.eval();
+    FizzBuzzTensorLoop cpp_model_tensor_loop;
+    cpp_model_tensor_loop.eval();
     end = chrono::high_resolution_clock::now();
-    cout << "Time taken (PyTorch Native Model Build) (ms): "
+    cout << "Time taken (PyTorch C++ Tensor Loop Model Build) (ms): "
         << chrono::duration_cast<std::chrono::milliseconds>(end - start).count() << '\n';
-
 
     for (int i = 0; i < 3; ++i) {
         cout << "\n\nRun: " << i << "\n";
@@ -129,17 +122,17 @@ int main(int argc, char* argv[]) {
             << chrono::duration_cast<std::chrono::milliseconds>(end - start).count() << '\n';
 
         start = chrono::high_resolution_clock::now();
-        result = cpp_model.forward({n});
+        result = cpp_model_tensor_loop.forward({n});
         end = chrono::high_resolution_clock::now();
         cout << "Result: [" << result << "]\n";
-        cout << "Time taken (PyTorch Native) (ms): "
+        cout << "Time taken (PyTorch C++ Tensor Loop) (ms): "
             << chrono::duration_cast<std::chrono::milliseconds>(end - start).count() << '\n';
 
         start = chrono::high_resolution_clock::now();
-        result = at_cpp_model.forward({n});
+        result = cpp_model_native_loop.forward({n});
         end = chrono::high_resolution_clock::now();
         cout << "Result: [" << result << "]\n";
-        cout << "Time taken (PyTorch ATNative) (ms): "
+        cout << "Time taken (PyTorch C++ Native Loop) (ms): "
             << chrono::duration_cast<std::chrono::milliseconds>(end - start).count() << '\n';
 
         start = chrono::high_resolution_clock::now();

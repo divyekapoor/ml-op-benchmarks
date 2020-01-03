@@ -47,9 +47,10 @@ PyTorch:
 |                                                      | Method Latency (ms) | Iteration Latency (usec) | Python Multiplier  | C++ Multiplier |
 | PyTorch Python                                       | 4007                | 40.07                    | 222.61             | 23851          |
 | PyTorch TorchScript Python (from Loaded TorchScript) | 2830                | 28.3                     | **157.22**         | 16845          |
-| PyTorch TorchScript C++ (Native)                     | 255                 | 2.55                     | **14.17**          | 1518           |
-| PyTorch TorchScript C++ (Native + ATen Tensors)      | 252                 | 2.52                     | **14.00**          | 1500           |
-| NumPy Python                                         | 420                 | 4.2                     | **23.3**           | 2500           |
+| PyTorch TorchScript Python (from Loaded TorchScript) | 2830                | 28.3                     | **157.22**         | 16845          |
+| PyTorch C++ API (torch::Tensor Loop Counter)         | 2761                | 27.61                    | **153.39**         | 16434          |
+| PyTorch C++ API (Native Loop Counter)                | 255                 | 2.55                     | **14.17**          | 1518           |
+| NumPy Python                                         | 420                 | 4.2                      | **23.3**           | 2500           |
 | Raw Python                                           | 18                  | 0.18                     | 1.00               | 107            |
 | **PyTorch Vectorized**                               | **7.8**             | **0.078**                | **0.43**           | 46             |
 | **PyTorch Vectorized (optimized=True)**              | **5.03**            | **0.050**                | **0.28**           | 29             |
